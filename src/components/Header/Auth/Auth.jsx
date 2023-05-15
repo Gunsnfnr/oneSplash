@@ -12,6 +12,7 @@ export const Auth = () => {
   // }
 
   useEffect(() => {
+    console.log('in useEffect');
     if (localStorage.getItem('bearer')) {
       setIstoken(true);
     }

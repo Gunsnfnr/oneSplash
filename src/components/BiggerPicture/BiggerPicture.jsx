@@ -7,7 +7,7 @@ import heartIcon from './img/icon_heart_2.png';
 // import PropTypes from 'prop-types';
 // import athrLogo from './img/profile-1.avif';
 import {useLocation} from 'react-router-dom';
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {CLIENT_ID, URL_API} from '../../api/const.js';
 import axios from 'axios';
 import {useState} from 'react';
