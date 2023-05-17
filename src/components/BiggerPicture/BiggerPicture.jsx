@@ -1,10 +1,7 @@
 import style from './BiggerPicture.module.css';
-// import img01 from '../Main/Feed/img/01 simon-wilkes-S297j2CsdlM-unsplash.jpg';
-// import img02 from '../Main/Feed/img/02 hanvin-cheong-h3P5sbqKhus-unsplash.jpg';
 import redHeartIcon from './img/icon_heart_1.png';
 import heartIcon from './img/icon_heart_2.png';
 // import {ReactComponent as DwnldImg} from './img/dwnld.svg';
-// import PropTypes from 'prop-types';
 // import athrLogo from './img/profile-1.avif';
 import {useLocation} from 'react-router-dom';
 import React, {useEffect} from 'react';
@@ -15,6 +12,7 @@ import {sendLike} from '../../api/like.jsx';
 
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
+  const [isPhotoLiked, setIsPhotoLiked] = useState();
   const location = useLocation();
 
   useEffect(() => {
@@ -38,22 +36,19 @@ export const BiggerPicture = () => {
       });
   }, []);
 
-  let receivedLikeData = false;
+  const receivedLikeData = undefined;
   const handleClick = () => {
     console.log(1);
-    receivedLikeData = sendLike(location.state.id);
-    console.log('receivedLikeData: ', receivedLikeData);
+    setIsPhotoLiked(sendLike(location.state.id));
+    console.log('isLiked = ', isPhotoLiked);
+    // console.log('receivedLikeData: ', receivedLikeData);
   };
-
-  // if (publishPhoto) {
-  //   console.log('publishPhoto+photoData: ', photoData);
-  // }
 
   return (
     <div className={style.container}>
       <div className={style.upper_container}>
         <div className={
-          `${(photoData.liked_by_user) ?
+          `${(photoData.liked_by_user || isPhotoLiked) ?
             style.likes_liked : style.likes} ${localStorage.getItem('bearer') ?
             style.activeLink : style.inactive}`
         } onClick={handleClick}>

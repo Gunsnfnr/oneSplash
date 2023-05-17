@@ -7,16 +7,16 @@ import {useEffect, useState} from 'react';
 
 export const Auth = () => {
   const [isToken, setIstoken] = useState(false);
-  // if (localStorage.getItem('bearer') && !isToken) {
-  //   setIstoken(true);
-  // }
 
   useEffect(() => {
-    console.log('in useEffect');
-    if (localStorage.getItem('bearer')) {
-      setIstoken(true);
-    }
-  }, []);
+    setTimeout(() => {
+      if (window.location.toString().includes('code')) {
+        if (localStorage.getItem('bearer')) {
+          setIstoken(true);
+        }
+      }
+    }, 1000);
+  }, [window.location.pathname]);
 
   if (!isToken) return (<a className={style.login} href={urlAuth}>Log in</a>);
 
