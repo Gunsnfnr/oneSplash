@@ -38,10 +38,11 @@ export const BiggerPicture = () => {
       });
   }, []);
 
+  let receivedLikeData = false;
   const handleClick = () => {
     console.log(1);
-    const receiveLikeData = sendLike(location.state.id);
-    console.log('receiveLikeData: ', receiveLikeData);
+    receivedLikeData = sendLike(location.state.id);
+    console.log('receivedLikeData: ', receivedLikeData);
   };
 
   // if (publishPhoto) {
@@ -52,12 +53,13 @@ export const BiggerPicture = () => {
     <div className={style.container}>
       <div className={style.upper_container}>
         <div className={
-          `${photoData.liked_by_user ?
+          `${(photoData.liked_by_user) ?
             style.likes_liked : style.likes} ${localStorage.getItem('bearer') ?
             style.activeLink : style.inactive}`
         } onClick={handleClick}>
           <img className={style.icon}
-            src={photoData.liked_by_user ? redHeartIcon : heartIcon}
+            src={(photoData.liked_by_user || receivedLikeData) ?
+              redHeartIcon : heartIcon}
           />
           <span className={style.likesNumber}>{photoData.likes}</span>
         </div>

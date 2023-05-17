@@ -16,7 +16,7 @@ export const Auth = () => {
     if (localStorage.getItem('bearer')) {
       setIstoken(true);
     }
-  }, [isToken]);
+  }, []);
 
   if (!isToken) return (<a className={style.login} href={urlAuth}>Log in</a>);
 
