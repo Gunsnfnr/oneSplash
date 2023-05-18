@@ -83,7 +83,6 @@ li.element:hover .download
   cursor: initial;
 }
 
-/* .showmasonry {
-  opacity: 1;
-  transform: scale(1) translate3d(0,0,0);
-} */
+.end {
+  width: 350px;
+}

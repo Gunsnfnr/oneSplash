@@ -3,7 +3,7 @@ import {ReactComponent as DwnldImg} from './img/dwnld.svg';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {CLIENT_ID, URL_API} from '../../../api/const.js';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 // `${URL_API}/users/ellienelie/photos/?client_id=${CLIENT_ID}`
 import Masonry from 'react-masonry-component';
 
@@ -12,6 +12,7 @@ export const Feed = () => {
     transitionDuration: 0
   };
   const [photosData, setPhotosData] = useState([]);
+  const endList = useRef(null);
   useEffect(() => {
     axios.get(`${URL_API}/photos/?per_page=30&client_id=${CLIENT_ID}`).then(resp => {
       console.log('resp.data: ', resp.data);
@@ -66,6 +67,7 @@ export const Feed = () => {
           )
           ))
         }
+        <li ref={endList} className={style.end}/>
       </Masonry>
     </ul>
   );

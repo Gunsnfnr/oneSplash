@@ -2,10 +2,11 @@ import axios from 'axios';
 import {URL_API} from './const.js';
 import {useState} from 'react';
 
-export const sendLike = (photoId) => {
-  const [isLiked, setIsLiked] = useState();
-  console.log('sendLike');
-  axios({
+export const useLike = (photoId) => {
+  if (!photoId) return;
+  const [isLiked, setIsLiked] = useState(false);
+  console.log('useLike');
+  photoId && axios({
     method: 'post',
     url: `${URL_API}/photos/${photoId}/like`,
     headers: {

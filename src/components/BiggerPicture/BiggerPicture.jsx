@@ -8,12 +8,14 @@ import React, {useEffect} from 'react';
 import {CLIENT_ID, URL_API} from '../../api/const.js';
 import axios from 'axios';
 import {useState} from 'react';
-import {sendLike} from '../../api/like.jsx';
+import {useLike} from '../../api/useLike.js';
 
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
-  const [isPhotoLiked, setIsPhotoLiked] = useState();
+  const [isPhotoLiked] = useLike(false);
   const location = useLocation();
+
+  // setIsPhotoLiked(sendLike(location.state.id));
 
   useEffect(() => {
     axios.get(`${URL_API}/photos/${location.state.id}/?client_id=${CLIENT_ID}`).then(resp => {
@@ -39,8 +41,9 @@ export const BiggerPicture = () => {
   const receivedLikeData = undefined;
   const handleClick = () => {
     console.log(1);
-    setIsPhotoLiked(sendLike(location.state.id));
-    console.log('isLiked = ', isPhotoLiked);
+    // setIsPhotoLiked(sendLike(location.state.id));
+    isPhotoLiked(location.state.id);
+    // console.log('isLiked = ', isPhotoLiked);
     // console.log('receivedLikeData: ', receivedLikeData);
   };
 
