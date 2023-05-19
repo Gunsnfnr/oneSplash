@@ -17,7 +17,7 @@ export const getToken = (code) => {
 
   console.log('urlAuthToken: ', urlAuthToken);
   // useEffect(() => {
-  axios.post(urlAuthToken)
+  !localStorage.getItem('bearer') && axios.post(urlAuthToken)
     // .then((data) => data.json())
     .then((data) => {
       console.log('dataToken: ', data);

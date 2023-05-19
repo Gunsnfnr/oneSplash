@@ -14,8 +14,7 @@ export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
   const [isPhotoLiked] = useLike();
   const location = useLocation();
-
-  // const [isPhotoLiked] = location.state.id ? useLike(location.state.id) : 'false';
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     axios.get(`${URL_API}/photos/${location.state.id}/?client_id=${CLIENT_ID}`).then(resp => {
@@ -38,22 +37,24 @@ export const BiggerPicture = () => {
       });
   }, []);
 
-  const receivedLikeData = undefined;
   const handleClick = () => {
-    isPhotoLiked(location.state.id);
-    console.log('isPhotoLiked(location.state.id): ', isPhotoLiked(location.state.id));
+    console.log('isLiked: ', isLiked);
+    const logger = setIsLiked(isPhotoLiked(location.state.id));
+    console.log('logger.isPhotoLiked(location.state.id): ', logger);
   };
+
+  console.log('isLiked in BiggerPicture: ', isLiked);
 
   return (
     <div className={style.container}>
       <div className={style.upper_container}>
         <div className={
-          `${(photoData.liked_by_user || isPhotoLiked) ?
+          `${(isLiked || photoData.liked_by_user) ?
             style.likes_liked : style.likes} ${localStorage.getItem('bearer') ?
             style.activeLink : style.inactive}`
         } onClick={handleClick}>
           <img className={style.icon}
-            src={(photoData.liked_by_user || receivedLikeData) ?
+            src={(isLiked || photoData.liked_by_user) ?
               redHeartIcon : heartIcon}
           />
           <span className={style.likesNumber}>{photoData.likes}</span>

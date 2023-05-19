@@ -3,12 +3,10 @@ import {URL_API} from './const.js';
 import {useEffect, useState} from 'react';
 
 export const useLike = (photoId) => {
-  // if (!photoId) return;
   const [isLiked, setIsLiked] = useState();
 
-  console.log('useLike');
   const fetchLike = (photoId) => {
-    if (!photoId) return;
+    if (!photoId) return false;
     axios({
       method: 'post',
       url: `${URL_API}/photos/${photoId}/like`,
@@ -17,8 +15,7 @@ export const useLike = (photoId) => {
       }
     }).then(resp => {
       console.log('resp.data: ', resp.data);
-      const oopp = setIsLiked(resp.data.photo.liked_by_user);
-      console.log('oopp: ', oopp);
+      setIsLiked(resp.data.photo.liked_by_user);
     }
     ).catch(err => {
       console.log('err: ', err);
@@ -28,6 +25,6 @@ export const useLike = (photoId) => {
     fetchLike(photoId);
   }, [photoId]);
 
-  console.log('isLiked: ', isLiked);
+  console.log('isLiked in hook: ', isLiked);
   return [fetchLike];
 };

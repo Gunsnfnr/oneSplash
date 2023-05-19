@@ -7,7 +7,11 @@ import {useEffect, useState} from 'react';
 
 export const Auth = () => {
   const [isToken, setIstoken] = useState(false);
-
+  if (!isToken) {
+    if (localStorage.getItem('bearer')) {
+      setIstoken(true);
+    }
+  }
   useEffect(() => {
     setTimeout(() => {
       if (window.location.toString().includes('code')) {
@@ -22,6 +26,9 @@ export const Auth = () => {
 
   return (
     <LoginImg className={style.LoginImg}/>
+    // localStorage.getItem('bearer') ?
+    //     <LoginImg className={style.LoginImg}/> :
+    //  <a className={style.login} href={urlAuth}>Log in</a>
   );
 };
 
