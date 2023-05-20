@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 
 export const useLike = (photoId) => {
   const [isLiked, setIsLiked] = useState();
+  const [totalLikes, setTotalLikes] = useState();
 
   const fetchLike = (photoId) => {
     if (!photoId) return false;
@@ -16,6 +17,7 @@ export const useLike = (photoId) => {
     }).then(resp => {
       console.log('resp.data: ', resp.data);
       setIsLiked(resp.data.photo.liked_by_user);
+      setTotalLikes(resp.data.photo.likes);
     }
     ).catch(err => {
       console.log('err: ', err);
@@ -27,5 +29,6 @@ export const useLike = (photoId) => {
   }, [photoId]);
 
   console.log('isLiked in hook: ', isLiked);
-  return [fetchLike, isLiked];
+  console.log('isLiked in hook: ', totalLikes);
+  return [fetchLike, isLiked, totalLikes];
 };

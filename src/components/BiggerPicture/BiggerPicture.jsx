@@ -12,7 +12,8 @@ import {useLike} from '../../api/useLike.js';
 
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
-  const [isPhotoLikedFunction, isLikenReceivedFromHook] = useLike();
+  const [likesOfPhoto, setLikesOfPhoto] = useState();
+  const [isPhotoLikedFunction, isLikenReceivedFromHook, totalLikesReceivedFromHook] = useLike();
   const location = useLocation();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -30,6 +31,8 @@ export const BiggerPicture = () => {
         liked_by_user: resp.data.liked_by_user,
       };
       setPhotoData(photoInfo);
+      console.log('photoInfo.likes: ', photoInfo.likes);
+      setLikesOfPhoto(photoInfo.likes);
       return photoData;
     })
       .catch(err => {
@@ -43,10 +46,12 @@ export const BiggerPicture = () => {
     isPhotoLikedFunction(location.state.id);
     console.log('isLikenReceivedFromHook: ', isLikenReceivedFromHook);
     console.log('in handleClick isLiked is: ', isLiked);
+    console.log('totalLikesReceivedFromHook: ', totalLikesReceivedFromHook);
   };
 
   useEffect(() => {
     setIsLiked(isLikenReceivedFromHook);
+    setLikesOfPhoto(totalLikesReceivedFromHook);
   }, [isLikenReceivedFromHook]);
 
   console.log('isLiked in BiggerPicture: ', isLiked);
@@ -63,7 +68,7 @@ export const BiggerPicture = () => {
             src={(isLiked || photoData.liked_by_user) ?
               redHeartIcon : heartIcon}
           />
-          <span className={style.likesNumber}>{photoData.likes}</span>
+          <span className={style.likesNumber}>{likesOfPhoto}</span>
         </div>
         <a href={photoData.download} title='download' target='_blank' rel="noreferrer">
           <div className={style.download}>
