@@ -13,7 +13,7 @@ import {useLike} from '../../api/useLike.js';
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
   const [likesOfPhoto, setLikesOfPhoto] = useState();
-  const [isPhotoLikedFunction, isLikenReceivedFromHook, totalLikesReceivedFromHook] = useLike();
+  const [isPhotoLikedFunction, isLikedReceivedFromHook, totalLikesReceivedFromHook] = useLike();
   const location = useLocation();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -31,7 +31,6 @@ export const BiggerPicture = () => {
         liked_by_user: resp.data.liked_by_user,
       };
       setPhotoData(photoInfo);
-      console.log('photoInfo.likes: ', photoInfo.likes);
       setLikesOfPhoto(photoInfo.likes);
       return photoData;
     })
@@ -41,20 +40,19 @@ export const BiggerPicture = () => {
   }, []);
 
   const handleClick = () => {
-    // console.log('isLiked: ', isLiked);
-    // console.log('isPhotoLikedFunction -> ', isPhotoLikedFunction);
-    isPhotoLikedFunction(location.state.id);
-    console.log('isLikenReceivedFromHook: ', isLikenReceivedFromHook);
+    console.log('CHECK:', isLiked, photoData.liked_by_user);
+    const method = (isLiked || photoData.liked_by_user) ? 'delete' : 'post';
+
+    isPhotoLikedFunction(location.state.id, method);
+    console.log('isLikedReceivedFromHook: ', isLikedReceivedFromHook);
     console.log('in handleClick isLiked is: ', isLiked);
     console.log('totalLikesReceivedFromHook: ', totalLikesReceivedFromHook);
   };
 
   useEffect(() => {
-    setIsLiked(isLikenReceivedFromHook);
+    setIsLiked(isLikedReceivedFromHook);
     setLikesOfPhoto(totalLikesReceivedFromHook);
-  }, [isLikenReceivedFromHook]);
-
-  console.log('isLiked in BiggerPicture: ', isLiked);
+  }, [isLikedReceivedFromHook]);
 
   return (
     <div className={style.container}>
