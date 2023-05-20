@@ -20,11 +20,12 @@ export const useLike = (photoId) => {
     ).catch(err => {
       console.log('err: ', err);
     });
+    // isLiked && console.log('in fetchlike ', isLiked);
   };
   useEffect(() => {
     fetchLike(photoId);
   }, [photoId]);
 
   console.log('isLiked in hook: ', isLiked);
-  return [fetchLike];
+  return [fetchLike, isLiked];
 };

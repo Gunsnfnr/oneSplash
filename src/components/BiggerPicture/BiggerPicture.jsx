@@ -12,7 +12,7 @@ import {useLike} from '../../api/useLike.js';
 
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});
-  const [isPhotoLiked] = useLike();
+  const [isPhotoLikedFunction, isLikenReceivedFromHook] = useLike();
   const location = useLocation();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -38,10 +38,16 @@ export const BiggerPicture = () => {
   }, []);
 
   const handleClick = () => {
-    console.log('isLiked: ', isLiked);
-    const logger = setIsLiked(isPhotoLiked(location.state.id));
-    console.log('logger.isPhotoLiked(location.state.id): ', logger);
+    // console.log('isLiked: ', isLiked);
+    // console.log('isPhotoLikedFunction -> ', isPhotoLikedFunction);
+    isPhotoLikedFunction(location.state.id);
+    console.log('isLikenReceivedFromHook: ', isLikenReceivedFromHook);
+    console.log('in handleClick isLiked is: ', isLiked);
   };
+
+  useEffect(() => {
+    setIsLiked(isLikenReceivedFromHook);
+  }, [isLikenReceivedFromHook]);
 
   console.log('isLiked in BiggerPicture: ', isLiked);
 
