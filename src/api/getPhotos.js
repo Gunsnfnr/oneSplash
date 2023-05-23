@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {CLIENT_ID, URL_API} from './const.js';
 
 export const getPhotos = () => {
-  const [photosData, setPhotosData] = useState([]);
+  const [newPhotos, setNewPhotos] = useState([]);
 
   const fetchPhotos = (page) => {
     if (!page) return;
@@ -23,14 +23,14 @@ export const getPhotos = () => {
         };
       }
       console.log();
-      setPhotosData(photosInfo);
-      return photosData;
+      setNewPhotos(photosInfo);
+      return newPhotos;
     })
       .catch(err => {
         console.log('err: ', err);
       });
   };
 
-  return [fetchPhotos, photosData];
+  return [fetchPhotos, newPhotos];
 };
 
