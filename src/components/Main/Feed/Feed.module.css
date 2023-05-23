@@ -11,8 +11,8 @@
   /* max-height: 1200px; */
   flex-wrap: wrap;
 
-  -webkit-animation: 2.7s ease 0s normal forwards 1 fadein;
-  animation: 2.7s ease 0s normal forwards 1 fadein;
+  /* -webkit-animation: 2.7s ease 0s normal forwards 1 fadein;
+  animation: 2.7s ease 0s normal forwards 1 fadein; */
 }
 
 @keyframes fadein{
@@ -35,6 +35,8 @@
 .photo {
   max-width: 350px;
   cursor: zoom-in;
+  -webkit-animation: 2.7s ease 0s normal forwards 1 fadein;
+  animation: 2.7s ease 0s normal forwards 1 fadein;
 }
 .yellow {
   border: 3px solid yellow;
@@ -81,6 +83,8 @@ li.element:hover .download
   background-image: url(./img/h7.svg);
   padding: 2px 9px 0;
   cursor: initial;
+  -webkit-animation: 2.7s ease 0s normal forwards 1 fadein;
+  animation: 2.7s ease 0s normal forwards 1 fadein;
 }
 
 .end {

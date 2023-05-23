@@ -1,41 +1,47 @@
 import style from './Feed.module.css';
 import {ReactComponent as DwnldImg} from './img/dwnld.svg';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
-import {CLIENT_ID, URL_API} from '../../../api/const.js';
 import {useEffect, useRef, useState} from 'react';
-// `${URL_API}/users/ellienelie/photos/?client_id=${CLIENT_ID}`
 import Masonry from 'react-masonry-component';
+import {getPhotos} from '../../../api/getPhotos.js';
 
 export const Feed = () => {
+  let page = 1;
   const masonryOptions = {
     transitionDuration: 0
   };
-  const [photosData, setPhotosData] = useState([]);
+
   const endList = useRef(null);
+  const [fetchPhotos, newPhotos] = getPhotos();
+  const [photosData, setPhotosData] = useState([]);
+
   useEffect(() => {
-    axios.get(`${URL_API}/photos/?per_page=30&client_id=${CLIENT_ID}`).then(resp => {
-      console.log('resp.data: ', resp.data);
-      const photosInfo = [];
-      for (let i = 0; i < resp.data.length; i++) {
-        photosInfo[i] = {
-          url: resp.data[i].urls.small,
-          author: resp.data[i].user.username,
-          authorLink: resp.data[i].user.links.html,
-          authorLogo: resp.data[i].user.profile_image.small,
-          alt: resp.data[i].alt_description,
-          likes: resp.data[i].likes,
-          id: resp.data[i].id,
-          download: resp.data[i].links.download,
-        };
-      }
-      console.log();
-      setPhotosData(photosInfo);
-      return photosData;
-    })
-      .catch(err => {
-        console.log('err: ', err);
+    fetchPhotos(page);
+  }, []);
+
+  useEffect(() => {
+    newPhotos !== [] && setPhotosData([...photosData, ...newPhotos]);
+  }, [newPhotos]);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (photosData === []) return;
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          ++page;
+          fetchPhotos(page);
+        }
+      }, {
+        rootMargin: '100px',
       });
+      observer.observe(endList.current);
+      return () => {
+        if (endList.current) {
+          observer.unobserve(endList.current);
+        }
+      };
+    }, 3000);
   }, []);
 
   return (
