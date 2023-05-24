@@ -3,7 +3,7 @@ import {ReactComponent as DwnldImg} from './img/dwnld.svg';
 import {Link} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 import Masonry from 'react-masonry-component';
-import {getPhotos} from '../../../api/getPhotos.js';
+import {getPhotos} from '../../../hooks/getPhotos.js';
 
 export const Feed = () => {
   let page = 1;

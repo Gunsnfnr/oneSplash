@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useState} from 'react';
-import {CLIENT_ID, URL_API} from './const.js';
+import {CLIENT_ID, URL_API} from '../api/const';
 
 export const getPhotos = () => {
   const [newPhotos, setNewPhotos] = useState([]);

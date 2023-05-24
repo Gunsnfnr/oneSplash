@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {URL_API} from './const.js';
+import {URL_API} from '../api/const.js';
 import {useEffect, useState} from 'react';
 
 export const useLike = (photoId) => {

@@ -8,7 +8,7 @@ import React, {useEffect} from 'react';
 import {CLIENT_ID, URL_API} from '../../api/const.js';
 import axios from 'axios';
 import {useState} from 'react';
-import {useLike} from '../../api/useLike.js';
+import {useLike} from '../../hooks/useLike.js';
 
 export const BiggerPicture = () => {
   const [photoData, setPhotoData] = useState({});

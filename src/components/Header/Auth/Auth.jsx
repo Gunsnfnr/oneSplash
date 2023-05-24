@@ -1,7 +1,7 @@
 import style from './Auth.module.css';
 import {ReactComponent as LoginImg} from '../img/login.svg';
 import {urlAuth} from '../../../api/auth.js';
-import {getToken} from '../../../api/token.jsx';
+import {getToken} from '../../../api/token';
 import {useEffect, useState} from 'react';
 
 
