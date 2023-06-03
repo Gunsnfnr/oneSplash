@@ -1,8 +1,43 @@
-.LoginImg {
-  width: 37px;
-  height: 32px;
+.container {
+  position: relative;
+}
+.cont {
+  text-align: center;
 }
 .login {
   line-height: 2rem;
   font-weight: bold;
+}
+.btn {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.logout {
+  position: absolute;
+  top: 100%;
+  right: -12%;
+  background-color: #fdc292;
+  border: 0;
+  color: var(--white);
+  padding: 4px 18px;
+  border: 1px solid #fdc292;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.logout:hover {
+  border: 1px solid #746456;
+  box-shadow: 0 1px 1px #0000002f;
+}
+.logoutInvisible {
+  display: none;
+}
+
+.LoginImg {
+  width: 37px;
+  height: 32px;
 }

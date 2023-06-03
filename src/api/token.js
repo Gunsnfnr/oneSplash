@@ -15,13 +15,10 @@ export const getToken = (code) => {
 
   const urlAuthToken = `${URL_API_TOKEN}${searchParamsToken.toString()}`;
 
-  console.log('urlAuthToken: ', urlAuthToken);
   // useEffect(() => {
   !localStorage.getItem('bearer') && axios.post(urlAuthToken)
-    // .then((data) => data.json())
     .then((data) => {
       console.log('dataToken: ', data);
-      console.log('data.data.access_token: ', data.data.access_token);
       localStorage.setItem('bearer', data.data.access_token);
       return data.data.access_token;
     })

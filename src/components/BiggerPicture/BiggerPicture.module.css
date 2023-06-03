@@ -1,28 +1,63 @@
 .container {
   opacity: 1;
 }
+
 .upper_container {
   margin: 0 auto;
   height: 4rem;
   width: 70%;
   display: flex;
   flex-direction: row;
-  justify-content:flex-start;
+  justify-content:space-between;
   gap: 30px;
   align-items: center;
 }
+
+.handlePhotoContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.backContainer {
+  height: 36px;
+  border: 1px solid #afacac;
+  border-radius: 6px;
+  padding: 0 4px;
+  cursor: pointer;
+}
+
+.backContainer:hover {
+  border: 1px solid #000;
+  box-shadow: 0 2px 3px #0000002f;
+}
+
+.backIcon {
+  width: 1.75rem;
+  margin: 4px 8px;
+}
+
+.back {
+  font-size: 15px;
+  vertical-align: top;
+  display: inline-block;
+  padding: 9px 7px 8px 0;
+}
+
 .icon {
   /* width: 49px;
   height: 42px; */
   width: 1.75rem;
   margin: 4px 8px;
 }
+
 .photo {
   display: block;
   max-height: 80vh;
   max-width: 80vw;
   margin: 0 auto;
 }
+
 .likes {
   display: flex;
   flex-direction: row;
@@ -32,6 +67,7 @@
   border-radius: 6px;
   padding: 0 4px;
 }
+
 .likes_liked {
   display: flex;
   flex-direction: row;
@@ -41,16 +77,21 @@
   border-radius: 6px;
   padding: 0 4px;
 }
+
 .activeLink:hover {
   border: 1px solid #000;
   box-shadow: 0 2px 3px #0000002f;
 }
+
 .likesNumber {
+  font-size: 15px;
   padding: 8px 7px 8px 0;
 }
+
 .activeLink{
   cursor: pointer;
 }
+
 .inactive{
   cursor: initial;
 }
@@ -64,17 +105,19 @@
   margin-top: 3px;
 }
 .download {
-  margin-right: 53px;
+  margin-right: 5px;
   width: 36px;
   height: 36px;
   padding: 11px;
   border: 1px solid #afacac;
   border-radius: 6px;
 }
+
 .download:hover {
   border: 1px solid #000;
   box-shadow: 0 2px 3px #0000002f;
 }
+
 .stripe  {
   position: relative;
   width: 15px;
@@ -85,10 +128,17 @@
   display: block;
   transform: rotate(135deg);
 }
-.lower_container {
-  margin: 0 auto;
+
+.lower_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.author_container {
+  /* margin: 0 auto; */
   height: 4rem;
-  width: 70%;
+  width: 55%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -100,7 +150,14 @@
   display: block;
   border-radius: 16px;
 }
+
 .author_icon+a{  
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
+}
+
+.date {
+  display: flex;
+  font-size: 15px;
+  align-items: center;
 }

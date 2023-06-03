@@ -1,0 +1,40 @@
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {CLIENT_ID, URL_API} from '../../api/const.js';
+import axios from 'axios';
+import {feedSlice} from './feedSlice.js';
+
+
+export const feedRequestAsync = createAsyncThunk(
+  'feed/fetch',
+  (parameters, {dispatch}) => {
+    const page = parameters.page;
+    const clearPhotos = parameters.clearPhotos;
+
+    if (clearPhotos === true) {
+      dispatch(feedSlice.actions.clearPhotos());
+    }
+    if (!page) return;
+
+    dispatch(feedSlice.actions.feedRequest());
+
+    return axios.get(`${URL_API}/photos/?per_page=30&client_id=${CLIENT_ID}&page=${page}`)
+      .then(resp => {
+        console.log('resp.data: ', resp.data);
+        const newPhotos = [];
+        for (let i = 0; i < resp.data.length; i++) {
+          newPhotos[i] = {
+            url: resp.data[i].urls.small,
+            author: resp.data[i].user.username,
+            authorLink: resp.data[i].user.links.html,
+            authorLogo: resp.data[i].user.profile_image.small,
+            alt: resp.data[i].alt_description,
+            likes: resp.data[i].likes,
+            id: resp.data[i].id,
+            download: resp.data[i].links.download,
+          };
+        }
+        dispatch(feedSlice.actions.feedRequestSuccess({newPhotos}));
+      })
+      .catch(error => ({error}));
+  }
+);
