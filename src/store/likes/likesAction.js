@@ -22,8 +22,6 @@ export const likesRequestAsync = createAsyncThunk(
       const isLiked = resp.data.photo.liked_by_user;
       const totalLikes = resp.data.photo.likes;
       dispatch(likesSlice.actions.likesRequestSuccess({isLiked, totalLikes}));
-      // setIsLiked(resp.data.photo.liked_by_user);
-      // setTotalLikes(resp.data.photo.likes);
     }
     )
       .catch(error => ({error}));

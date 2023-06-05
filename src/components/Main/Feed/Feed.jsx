@@ -8,7 +8,6 @@ import {feedRequestAsync} from '../../../store/unsplashFeed/feedAction.js';
 import {useDispatch, useSelector} from 'react-redux';
 
 export const Feed = () => {
-  // const loadedPosts = useSelector(state => state.postsData.posts);
   const photosData = useSelector(state => state.feed.newPhotos);
   const dispatch = useDispatch();
   let page = 1;
@@ -17,18 +16,11 @@ export const Feed = () => {
   };
 
   const endList = useRef(null);
-  // const [fetchPhotos, newPhotos] = getPhotos();
-  // const [photosData, setPhotosData] = useState([]);
 
   useEffect(() => {
     dispatch(feedRequestAsync({page, clearPhotos: false}));
-    // fetchPhotos(page);
   }, []);
 
-  // useEffect(() => {
-  //   console.log('newPhotos: ', newPhotos);
-  //   newPhotos && setPhotosData([...photosData, ...newPhotos]);
-  // }, [newPhotos]);
   const handleClick = () => {
     dispatch(feedRequestAsync({page: undefined, clearPhotos: true}));
   };
@@ -62,7 +54,6 @@ export const Feed = () => {
         {
           (photosData.map((photo) => (
             <li className={style.element} key={photo.id}>
-              {/* <Link to='/picture' state={{id: photo.id}}> */}
               <Link to={`/picture/${photo.id}`} state={{id: photo.id}} onClick={handleClick}>
                 <img className={style.photo}
                   src={photo.url}

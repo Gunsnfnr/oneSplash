@@ -1,7 +1,6 @@
 import style from './Auth.module.css';
 import {ReactComponent as LoginImg} from '../img/login.svg';
 import {urlAuth} from '../../../api/auth.js';
-// import {getToken} from '../../../api/token';
 import {useEffect, useState} from 'react';
 import {getCode} from '../../../api/code.js';
 import {useDispatch, useSelector} from 'react-redux';
@@ -14,7 +13,6 @@ export const Auth = () => {
   const code = getCode();
   const token = useSelector(state => state.token.token) || localStorage.getItem('bearer');
   const username = useSelector(state => state.user.username);
-  // const profileImage = useSelector(state => state.user.profileImage);
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
 

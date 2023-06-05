@@ -15,7 +15,6 @@ export const getToken = (code) => {
 
   const urlAuthToken = `${URL_API_TOKEN}${searchParamsToken.toString()}`;
 
-  // useEffect(() => {
   !localStorage.getItem('bearer') && axios.post(urlAuthToken)
     .then((data) => {
       console.log('dataToken: ', data);
@@ -25,5 +24,4 @@ export const getToken = (code) => {
     .catch(err => {
       console.log('err: ', err);
     });
-  // }, []);
 };

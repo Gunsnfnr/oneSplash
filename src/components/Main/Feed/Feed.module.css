@@ -5,9 +5,6 @@
   flex-wrap: wrap;
   margin: 0 auto;
   padding-top: 5px;
-
-  /* -webkit-animation: 2.7s ease 0s normal forwards 1 fadein;
-  animation: 2.7s ease 0s normal forwards 1 fadein; */
 }
 
 @keyframes fadein{
